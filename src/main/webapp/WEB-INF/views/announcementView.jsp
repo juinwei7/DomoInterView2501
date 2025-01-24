@@ -10,25 +10,31 @@
             width: 100%;
             border-collapse: collapse;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f4f4f4;
         }
+
         .actions {
             text-align: center;
         }
+
         .no-data {
             color: red;
             font-weight: bold;
         }
+
         .pagination {
             margin-top: 20px;
             text-align: center;
         }
+
         .pagination a {
             margin: 0 5px;
             padding: 8px 12px;
@@ -37,11 +43,13 @@
             color: #007bff;
             border-radius: 4px;
         }
+
         .pagination a.active {
             background-color: #007bff;
             color: white;
             border-color: #007bff;
         }
+
         .pagination a:hover {
             background-color: #ddd;
         }
@@ -66,23 +74,25 @@
 			<td colspan="5" class="no-data">無資料</td>
 		</tr>
 	</c:if>
-	<c:forEach var="announcement" items="${pagination.items}">
-		<tr>
-			<td>${announcement.title}</td>
-			<td>
-				<fmt:formatDate value="${announcement.publishDate}" pattern="yyyy/MM/dd HH:mm" />
-			</td>
-			<td>
-				<fmt:formatDate value="${announcement.expireDate}" pattern="yyyy/MM/dd HH:mm" />
-			</td>
-			<td>${announcement.author}</td>
-			<td class="actions">
-				<a href="/announcement/view/${announcement.id}">查看</a>
-				<a href="/announcement/edit/${announcement.id}">編輯</a>
-				<a href="/announcement/delete/${announcement.id}">刪除</a>
-			</td>
-		</tr>
-	</c:forEach>
+	<c:if test="${not empty pagination.items}">
+		<c:forEach var="announcement" items="${pagination.items}">
+			<tr>
+				<td>${announcement.title}</td>
+				<td>
+					<fmt:formatDate value="${announcement.publishDate}" pattern="yyyy/MM/dd HH:mm" />
+				</td>
+				<td>
+					<fmt:formatDate value="${announcement.expireDate}" pattern="yyyy/MM/dd HH:mm" />
+				</td>
+				<td>${announcement.author}</td>
+				<td class="actions">
+					<a href="/announcement/view/${announcement.id}">查看</a>
+					<a href="/announcement/edit/${announcement.id}">編輯</a>
+					<a href="/announcement/delete/${announcement.id}">刪除</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</c:if>
 	</tbody>
 </table>
 

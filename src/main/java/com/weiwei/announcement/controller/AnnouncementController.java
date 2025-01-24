@@ -25,6 +25,12 @@ public class AnnouncementController {
                        Model model) {
         List<AnnouncementVo> allAnnouncements = announcementService.getAnnouncements();
 
+        if (allAnnouncements.isEmpty()) {
+            model.addAttribute("pagination", null);
+            model.addAttribute("msg", "目前沒有公告");
+            return "announcementView";
+        }
+
         int totalItems = allAnnouncements.size();
         int totalPages = (int) Math.ceil((double) totalItems / size);
 
